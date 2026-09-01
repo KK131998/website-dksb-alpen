@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #ffffff;
+  --navy: #194e9e;
+  --accent: #00aeef;
+  --sky: #e6f6fd;
+  --sky-deep: #b9e8fa;
+  --muted: #5a6b80;
+  --line: #cceef8;
+  --sun: #f7941e;
+  --grass: #8cc63f;
+}
+
+@font-face {
+  font-family: "Blogger Sans";
+  src:
+    url("/fonts/BloggerSans-Medium.woff2") format("woff2"),
+    url("/fonts/BloggerSans-Medium.woff") format("woff"),
+    url("/fonts/BloggerSans-Medium.ttf") format("truetype"),
+    local("Blogger Sans Medium"),
+    local("BloggerSans-Medium");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blogger Sans";
+  src:
+    url("/fonts/BloggerSans.woff2") format("woff2"),
+    url("/fonts/BloggerSans.woff") format("woff"),
+    url("/fonts/BloggerSans-Regular.ttf") format("truetype"),
+    local("Blogger Sans"),
+    local("BloggerSans");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background: var(--paper);
+  color: var(--navy);
+  font-family: var(--font-sans), "PT Sans Narrow", Helvetica, Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-title,
+.font-heading,
+.font-subhead {
+  font-family: "Blogger Sans", var(--font-heading), Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+h1,
+.page-title {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3,
+.font-subhead {
+  font-size: 1.55rem;
+}
+
+h4 {
+  font-size: 1.375rem;
+}
+
+.wp-content {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+.wp-content > * + * {
+  margin-top: 1.05rem;
+}
+
+.wp-content h2,
+.wp-content h3,
+.wp-content h4 {
+  color: var(--navy);
+  font-family: "Blogger Sans", var(--font-heading), Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.wp-content h2 {
+  font-size: 2.2rem;
+  margin-top: 2rem;
+}
+
+.wp-content h3 {
+  font-size: 1.55rem;
+  margin-top: 1.5rem;
+}
+
+.wp-content a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wp-content ul,
+.wp-content ol {
+  padding-left: 1.2rem;
+}
+
+.wp-content img {
+  height: auto;
+  max-width: 100%;
+  border-radius: 1.5rem;
+}
+
+.wp-content figure {
+  margin: 2rem 0;
+}
+
+.wp-content figcaption {
+  display: none;
+}
+
+.wp-content blockquote {
+  font-family: "Blogger Sans", var(--font-heading), Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--navy);
+}
