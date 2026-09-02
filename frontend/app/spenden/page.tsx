@@ -1,7 +1,8 @@
-import CmsPage, { PAGE_SLUGS } from "@/components/CmsPage";
+import { redirect } from "next/navigation";
+import { MITMACHEN_SPENDEN_HREF } from "@/lib/mitmachen";
 
 export const dynamic = "force-static";
 
 export default function SpendenPage() {
-  return <CmsPage slug={PAGE_SLUGS.spenden} kicker="Mitmachen & Unterstützen" fallbackTitle="Spenden" />;
+  redirect(MITMACHEN_SPENDEN_HREF);
 }

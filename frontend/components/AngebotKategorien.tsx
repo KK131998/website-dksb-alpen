@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { AngebotKarte } from "@/components/AngebotKarte";
 import {
   categoryHref,
   categoryImage,
+  offersInCategory,
   type AngebotKategorie,
 } from "@/lib/angebot-kategorien";
 import type { Angebot } from "@/lib/wordpress";
@@ -80,34 +82,72 @@ export function AngebotKategorieCards({
   );
 }
 
+export function AngebotNachKategorien({
+  angebote,
+  kategorien,
+}: {
+  angebote: Angebot[];
+  kategorien: AngebotKategorie[];
+}) {
+  return (
+    <div className="space-y-16">
+      {kategorien.map((category) => {
+        const items = offersInCategory(angebote, category);
+        return (
+          <section key={category.slug} id={category.slug} className="scroll-mt-32">
+            <h2 className="text-3xl tracking-tight sm:text-4xl" style={{ color: category.accent }}>
+              {category.title}
+            </h2>
+            {category.description ? (
+              <p className="mt-2 max-w-2xl text-[0.98rem] leading-7 text-[var(--muted)]">
+                {category.description}
+              </p>
+            ) : null}
+            {items.length > 0 ? (
+              <div className="mt-8 grid gap-8 md:grid-cols-2">
+                {items.map((item) => (
+                  <AngebotKarte key={item.slug} item={item} />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-6 text-[var(--muted)]">
+                Für diese Kategorie gibt es gerade keine Einträge.
+              </p>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
 function KategorieCard({
   category,
   image,
   href,
 }: {
   category: AngebotKategorie;
-  image: string | null;
+  image: string;
   href: string;
 }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[1.6rem] bg-white shadow-[0_12px_32px_rgba(30,58,95,0.08)]">
+    <Link
+      href={href}
+      className="flex h-full flex-col overflow-hidden rounded-[1.6rem] bg-white shadow-[0_12px_32px_rgba(30,58,95,0.08)]"
+    >
       <div className="flex flex-1 flex-col p-6 pt-7" style={{ backgroundColor: category.background }}>
         <CategoryIcon id={category.id} color={category.accent} />
         <h3 className="mt-5 text-[1.35rem] leading-snug" style={{ color: category.accent }}>
           {category.title}
         </h3>
-        <Link
-          href={href}
-          className="mt-auto pt-5 text-sm font-bold"
-          style={{ color: category.accent }}
-        >
+        <span className="mt-auto pt-5 text-sm font-bold" style={{ color: category.accent }}>
           Mehr erfahren →
-        </Link>
+        </span>
       </div>
       <div className="h-44 overflow-hidden bg-[var(--sky)]">
-        {image ? <img src={image} alt="" className="h-full w-full object-cover" /> : null}
+        <img src={image} alt="" className="h-full w-full object-cover" />
       </div>
-    </article>
+    </Link>
   );
 }
 

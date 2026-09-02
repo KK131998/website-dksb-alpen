@@ -1,13 +1,7 @@
-import CmsPage, { PAGE_SLUGS } from "@/components/CmsPage";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-static";
 
 export default function EhrenamtPage() {
-  return (
-    <CmsPage
-      slug={PAGE_SLUGS.ehrenamt}
-      kicker="Mitmachen & Unterstützen"
-      fallbackTitle="Ehrenamtlich engagieren"
-    />
-  );
+  redirect("/mitmachen#ehrenamtlich-engagieren");
 }

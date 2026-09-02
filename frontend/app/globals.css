@@ -38,6 +38,11 @@
   font-display: swap;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
 body {
   background: var(--paper);
   color: var(--navy);
@@ -118,7 +123,24 @@ h4 {
 
 .wp-content ul,
 .wp-content ol {
-  padding-left: 1.2rem;
+  margin-top: 1.05rem;
+  padding-left: 1.4rem;
+}
+
+.wp-content ul {
+  list-style: disc;
+}
+
+.wp-content ol {
+  list-style: decimal;
+}
+
+.wp-content li + li {
+  margin-top: 0.45rem;
+}
+
+.wp-content li::marker {
+  color: var(--accent);
 }
 
 .wp-content img {

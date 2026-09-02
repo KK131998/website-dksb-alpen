@@ -1,13 +1,7 @@
-import CmsPage, { PAGE_SLUGS } from "@/components/CmsPage";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-static";
 
 export default function MitgliedWerdenPage() {
-  return (
-    <CmsPage
-      slug={PAGE_SLUGS.mitglied}
-      kicker="Mitmachen & Unterstützen"
-      fallbackTitle="Mitglied werden"
-    />
-  );
+  redirect("/mitmachen#mitglied-werden");
 }

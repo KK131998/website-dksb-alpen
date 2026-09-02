@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandLogo, BundesverbandLogo } from "@/components/Brand";
+import { MITMACHEN_SPENDEN_HREF } from "@/lib/mitmachen";
 
 const NAV = [
   { href: "/wer-wir-sind", label: "Über Uns" },
@@ -14,7 +15,7 @@ const NAV = [
 function SpendenButton({ className = "" }: { className?: string }) {
   return (
     <Link
-      href="/spenden"
+      href={MITMACHEN_SPENDEN_HREF}
       className={`inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--navy)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent)] ${className}`}
     >
       Spenden

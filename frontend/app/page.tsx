@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AngebotKategorieCards, AngebotKategorieHeader } from "@/components/AngebotKategorien";
 import { BlobShape } from "@/components/Brand";
 import { WpContent } from "@/components/Content";
-import { MitmachenBanner, MitmachenHeader, MitmachenKarten } from "@/components/MitmachenKarten";
+import { MitmachenHeader, MitmachenKarten } from "@/components/MitmachenKarten";
 import { TerminHeader, TerminKarten } from "@/components/TerminKarten";
 import { extractFirstImage, extractH3Sections, stripMedia } from "@/lib/html";
 import {
@@ -73,6 +73,15 @@ export default async function Home() {
         </div>
       </section>
 
+      {upcoming.length > 0 ? (
+        <section className="px-6 py-16">
+          <div className="mx-auto w-full max-w-6xl">
+            <TerminHeader />
+            <TerminKarten termine={upcoming} />
+          </div>
+        </section>
+      ) : null}
+
       <section className="relative mx-auto w-full max-w-3xl px-6 py-10 text-center">
         <WpContent html={introHtml} />
       </section>
@@ -105,22 +114,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-6 pb-16">
+      <section className="px-6 pb-20">
         <div className="mx-auto w-full max-w-6xl">
           <MitmachenHeader />
           <MitmachenKarten />
-          <MitmachenBanner />
         </div>
       </section>
-
-      {upcoming.length > 0 ? (
-        <section className="px-6 pb-20">
-          <div className="mx-auto w-full max-w-6xl">
-            <TerminHeader />
-            <TerminKarten termine={upcoming} />
-          </div>
-        </section>
-      ) : null}
     </main>
   );
 }

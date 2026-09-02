@@ -136,18 +136,25 @@ export function resolveKategorien(
   wpCats: AngebotKategorieNode[],
   angebote: Angebot[],
 ): AngebotKategorie[] {
-  if (wpCats.length > 0) {
-    return wpCats.map((node) =>
-      toKategorie(node.slug, node.title, categoryImageFromWp(node), presetForTitle(node.title)),
-    );
-  }
+  const categories =
+    wpCats.length > 0
+      ? wpCats.map((node) =>
+          toKategorie(node.slug, node.title, categoryImageFromWp(node), presetForTitle(node.title)),
+        )
+      : KATEGORIE_PRESETS.map((preset) => {
+          const photo = angebote.find((item) =>
+            labelsOf(item).some((label) => presetForTitle(label)?.id === preset.id),
+          )?.angebote?.foto?.node;
+          return toKategorie(preset.id, preset.title, photo ?? null, preset);
+        });
 
-  return KATEGORIE_PRESETS.map((preset) => {
-    const photo = angebote.find((item) =>
-      labelsOf(item).some((label) => presetForTitle(label)?.id === preset.id),
-    )?.angebote?.foto?.node;
-    return toKategorie(preset.id, preset.title, photo ?? null, preset);
-  });
+  return sortKategorien(categories);
+}
+
+function sortKategorien(categories: AngebotKategorie[]): AngebotKategorie[] {
+  const rest = categories.filter((category) => category.id !== "hilfe");
+  const hilfe = categories.filter((category) => category.id === "hilfe");
+  return [...rest, ...hilfe];
 }
 
 function labelsOf(item: Angebot): string[] {
@@ -202,15 +209,21 @@ export function getCategoryBySlug(
 }
 
 export function categoryHref(category: AngebotKategorie): string {
-  return `/angebote/${category.slug}`;
+  return `/angebote#${category.slug}`;
 }
 
-export function categoryImage(angebote: Angebot[], category: AngebotKategorie): string | null {
+export const ANGEBOT_FALLBACK_IMAGE = "/images/angebot-standard.png";
+
+export function angebotImageSrc(item: Angebot): string {
+  return item.angebote?.foto?.node?.sourceUrl ?? ANGEBOT_FALLBACK_IMAGE;
+}
+
+export function categoryImage(angebote: Angebot[], category: AngebotKategorie): string {
   if (category.image?.sourceUrl) {
     return category.image.sourceUrl;
   }
   const withPhoto = offersInCategory(angebote, category).find(
     (item) => item.angebote?.foto?.node?.sourceUrl,
   );
-  return withPhoto?.angebote?.foto?.node?.sourceUrl ?? null;
+  return withPhoto?.angebote?.foto?.node?.sourceUrl ?? ANGEBOT_FALLBACK_IMAGE;
 }

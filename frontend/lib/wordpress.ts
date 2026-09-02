@@ -126,6 +126,8 @@ export type Termin = {
     bisUhrzeit: string | null;
     ort: string | null;
     hinweis: string | null;
+    kurzbeschreibung: string | null;
+    foto: { node: WpImage } | null;
   } | null;
 };
 
@@ -320,6 +322,13 @@ export async function getTermine(): Promise<Termin[]> {
             bisUhrzeit
             ort
             hinweis
+            kurzbeschreibung
+            foto {
+              node {
+                sourceUrl
+                altText
+              }
+            }
           }
         }
       }
@@ -434,6 +443,7 @@ export function formatWpDateParts(iso: string | null): {
   day: string;
   month: string;
   weekday: string;
+  year: string;
 } | null {
   if (!iso) {
     return null;
@@ -447,7 +457,8 @@ export function formatWpDateParts(iso: string | null): {
   return {
     day: String(day).padStart(2, "0"),
     month: date.toLocaleDateString("de-DE", { month: "short", timeZone: "UTC" }).replace(".", ""),
-    weekday: date.toLocaleDateString("de-DE", { weekday: "short", timeZone: "UTC" }),
+    weekday: date.toLocaleDateString("de-DE", { weekday: "short", timeZone: "UTC" }).replace(".", ""),
+    year: String(year),
   };
 }
 
