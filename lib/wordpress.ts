@@ -48,7 +48,7 @@ export async function wpGraphql<T>(
     cache: "force-cache",
     next: {
       tags,
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 
@@ -278,7 +278,7 @@ async function getAngebotKategorieLabels(): Promise<Record<string, string[]>> {
       cache: "force-cache",
       next: {
         tags: ["wordpress", "angebot"],
-        revalidate: 3600,
+        revalidate: 60,
       },
     });
     if (!response.ok) {
