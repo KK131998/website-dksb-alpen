@@ -380,7 +380,7 @@ export function excerpt(text: string | null | undefined, max = 180): string {
   return `${clean.slice(0, max).replace(/\s+\S*$/, "")}…`;
 }
 
-export function formatWpDate(iso: string | null): string | null {
+export function formatWpDate(iso: string | null | undefined): string | null {
   if (!iso) {
     return null;
   }
@@ -439,7 +439,7 @@ function todayDateIso(): string {
   return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 }
 
-export function formatWpDateParts(iso: string | null): {
+export function formatWpDateParts(iso: string | null | undefined): {
   day: string;
   month: string;
   weekday: string;
@@ -462,7 +462,7 @@ export function formatWpDateParts(iso: string | null): {
   };
 }
 
-function parseWpTime(value: string | null): { hours: number; minutes: number; meridiem: string | null } | null {
+function parseWpTime(value: string | null | undefined): { hours: number; minutes: number; meridiem: string | null } | null {
   if (!value) {
     return null;
   }
@@ -486,15 +486,15 @@ function formatHoursMinutes(hours: number, minutes: number): string {
   return `${hours}:${String(minutes).padStart(2, "0")}`;
 }
 
-export function formatWpTime(value: string | null): string | null {
+export function formatWpTime(value: string | null | undefined): string | null {
   const parsed = parseWpTime(value);
   if (!parsed) {
-    return value;
+    return value ?? null;
   }
   return `${formatHoursMinutes(parsed.hours, parsed.minutes)} Uhr`;
 }
 
-export function formatWpTimeRange(von: string | null, bis: string | null): string | null {
+export function formatWpTimeRange(von: string | null | undefined, bis: string | null | undefined): string | null {
   let start = parseWpTime(von);
   const end = parseWpTime(bis);
   if (
@@ -511,7 +511,7 @@ export function formatWpTimeRange(von: string | null, bis: string | null): strin
   if (start) {
     return `${formatHoursMinutes(start.hours, start.minutes)} Uhr`;
   }
-  return von;
+  return von ?? null;
 }
 
 export function displayName(person: Vorstandsperson): string {

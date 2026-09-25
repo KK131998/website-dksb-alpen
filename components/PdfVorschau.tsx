@@ -24,7 +24,6 @@ export function PdfVorschau({ path, title }: PdfVorschauProps) {
         pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
         const pdf = await pdfjs.getDocument({ url: src }).promise;
         if (cancelled) {
-          await pdf.destroy();
           return;
         }
         pdfRef.current = pdf;
@@ -39,7 +38,6 @@ export function PdfVorschau({ path, title }: PdfVorschauProps) {
     void loadPdf();
     return () => {
       cancelled = true;
-      void pdfRef.current?.destroy();
       pdfRef.current = null;
     };
   }, [src]);
