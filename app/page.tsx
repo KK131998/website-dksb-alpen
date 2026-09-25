@@ -34,15 +34,35 @@ export default async function Home() {
   return (
     <main className="overflow-hidden">
       <section className="bg-[var(--sky)]">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
-          <div className="text-center lg:text-left">
+        <div className="mx-auto w-full max-w-[74.5rem] px-6 py-12 lg:py-16">
+          {heroImage ? (
+            <div className="relative mx-auto w-full">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt || ""}
+                className="h-auto w-full rounded-3xl object-contain shadow-[0_18px_40px_rgba(25,78,158,0.18)]"
+              />
+              <p
+                className="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center text-3xl leading-tight sm:text-5xl lg:text-6xl"
+                style={{
+                  color: "white",
+                  fontFamily: '"Blogger Sans", var(--font-heading), Helvetica, Arial, sans-serif',
+                  fontWeight: 500,
+                  textShadow: "0 2px 18px rgba(25, 78, 158, 0.55)",
+                }}
+              >
+                Der Kinderschutzbund e.V.
+              </p>
+            </div>
+          ) : null}
+          <div className={`text-center ${heroImage ? "mt-10" : ""}`}>
             <p className="font-subhead text-[var(--navy)]">Kinderschutzbund Alpen</p>
             <h1 className="page-title mt-2 text-5xl sm:text-6xl">Hinsehen, zuhören, helfen.</h1>
-            <p className="mx-auto mt-5 max-w-xl text-[var(--muted)] lg:mx-0">
+            <p className="mx-auto mt-5 max-w-xl text-[var(--muted)]">
               Für Kinder, Jugendliche und Familien in der Gemeinde Alpen – ehrenamtlich,
               nah und unbürokratisch.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/angebote"
                 className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-bold text-white"
@@ -57,19 +77,6 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-          {heroImage ? (
-            <div className="relative mx-auto w-full max-w-xl pb-3 pr-3">
-              <div
-                aria-hidden="true"
-                className="absolute -bottom-3 -right-3 hidden h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-3xl bg-[var(--navy)] sm:block"
-              />
-              <img
-                src={heroImage.src}
-                alt=""
-                className="relative z-10 aspect-[5/4] w-full rounded-3xl object-cover shadow-[0_18px_40px_rgba(25,78,158,0.18)]"
-              />
-            </div>
-          ) : null}
         </div>
       </section>
 

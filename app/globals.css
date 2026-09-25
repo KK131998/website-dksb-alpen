@@ -144,17 +144,122 @@ h4 {
 }
 
 .wp-content img {
+  display: block;
+  width: 100%;
   height: auto;
   max-width: 100%;
+  object-fit: contain;
   border-radius: 1.5rem;
 }
 
 .wp-content figure {
-  margin: 2rem 0;
+  margin: 2.5rem 0;
+}
+
+.wp-content figure.wp-block-image,
+.wp-content figure.wp-block-image img {
+  width: 100%;
 }
 
 .wp-content figcaption {
   display: none;
+}
+
+.wp-content .wp-block-file {
+  margin: 2rem 0;
+}
+
+.wp-content .wp-block-file__embed {
+  display: none;
+}
+
+.wp-content .wp-block-file__button {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.konzept-pdf {
+  margin: 3rem 0 1rem;
+}
+
+.konzept-pdf-stage {
+  position: relative;
+  margin-top: 1.5rem;
+  max-width: 36rem;
+}
+
+.konzept-pdf-sheet {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.7rem;
+  background: #f4f7fb;
+  box-shadow: 0 12px 30px rgba(30, 58, 95, 0.08);
+  transform: translate(12px, 12px);
+}
+
+.konzept-pdf-sheet.is-mid {
+  background: #eef4fb;
+  transform: translate(6px, 6px);
+}
+
+.konzept-pdf-paper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(30, 58, 95, 0.12);
+  min-height: 28rem;
+}
+
+.konzept-pdf-paper img,
+.konzept-pdf-paper iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 28rem;
+  border: 0;
+  background: #fff;
+}
+
+.konzept-pdf-paper iframe {
+  height: 36rem;
+}
+
+.konzept-pdf-loading {
+  display: flex;
+  min-height: 28rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.konzept-pdf-page-btn,
+.konzept-pdf-download {
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.konzept-pdf-page-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+}
+
+.konzept-pdf-page-btn:disabled {
+  opacity: 0.4;
+}
+
+.konzept-pdf-download {
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
 }
 
 .wp-content blockquote {

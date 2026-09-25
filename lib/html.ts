@@ -20,6 +20,34 @@ export function extractFirstImage(html: string | null | undefined): ExtractedIma
   return { src, alt };
 }
 
+/** Nutzt die größte Datei aus dem WordPress-srcset, damit Grafiken vollständig und scharf bleiben. */
+export function preferFullSizeImages(html: string | null | undefined): string {
+  if (!html) {
+    return "";
+  }
+  return html.replace(/<img\b[^>]*>/gi, (tag) => {
+    const srcset = tag.match(/\bsrcset="([^"]+)"/i)?.[1];
+    if (!srcset) {
+      return tag;
+    }
+    const largest = srcset
+      .split(",")
+      .map((part) => {
+        const match = part.trim().match(/^(\S+)\s+(\d+)w$/);
+        return match ? { url: match[1], width: Number(match[2]) } : null;
+      })
+      .filter((item): item is { url: string; width: number } => Boolean(item))
+      .sort((a, b) => b.width - a.width)[0];
+    if (!largest) {
+      return tag;
+    }
+    return tag
+      .replace(/\bsrc="[^"]+"/i, `src="${largest.url}"`)
+      .replace(/\s+srcset="[^"]+"/i, "")
+      .replace(/\s+sizes="[^"]+"/i, "");
+  });
+}
+
 export function stripMedia(html: string | null | undefined): string {
   if (!html) {
     return "";
